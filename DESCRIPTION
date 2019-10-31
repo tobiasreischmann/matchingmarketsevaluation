@@ -1,0 +1,19 @@
+Package: matchingMarketsEvaluation
+Type: Package
+Title: Evaluation of the matchingMarkets projekt
+Version: 0.1.0
+Author: Tobias Reischmann
+Maintainer: Tobias Reischmann <tobias.reischmann@wi.uni-muenster.de>
+Description: This projekt provides multiple methods to evaluate the stabsim3
+    function of the matchingMarkets package.
+License: GNU GPL v3
+Encoding: UTF-8
+LazyData: true
+Imports:
+  matchingMarkets,
+  parallel
+RoxygenNote: 6.1.1
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

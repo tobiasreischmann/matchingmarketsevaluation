@@ -1,0 +1,75 @@
+---
+title: "Threshold Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{threshold-analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Setup
+
+To get things running you have to included the matchingMarketsEvaluation package and some other requirements.
+Note that the matchingMarketsEvaluation package is currently based on the function `stabsim3`, which is not yet available in the official package. Please see [github.com/tobiasreischmann/matchingMarkets](https://github.com/tobiasreischmann/matchingMarkets/tree/feature/kita-simulation) for a current development state.
+
+```{r setup}
+library(parallel)
+library(matchingMarkets)
+library(matchingMarketsEvaluation)
+```
+
+## Configuration
+
+The package offers evaluation techniques to show how variations of different parameters influence the number of rounds needed for the execution of the decentralized college admission mechanism.
+The following code specifies a configuration analysing the mechanism for different values of the cut-off threshold.
+This threshold states, how many matchings are tolerated to be different from a full run of the algorithm if we select the results after an earlier round.
+
+```{r configuration}
+dimensionxval <- c(0.07,0.05,0.02,0.01,0.005,0.002,0.001)
+dimensionxlabels <- percent(dimensionxval, digits = 1)
+dimensionx <- "threshold"
+
+elem1 <- list(occupancyrate = 1.2, quota = .6, nStudents = 270, nColleges = 60, 
+              areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
+elem2 <- list(occupancyrate = .8, quota = .6, nStudents = 270, nColleges = 60, 
+              areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
+elem5 <- list(occupancyrate = 1.2, quota = .6, nStudents = 600, nColleges = 200, 
+              areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1)
+elem3 <- list(occupancyrate = 1.2, quota = .3, nStudents = 270, nColleges = 60, 
+              areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
+elem4 <- list(occupancyrate = .8, quota = .3, nStudents = 270, nColleges = 60, 
+              areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
+elem6 <- list(occupancyrate = .8, quota = .3, nStudents = 600, nColleges = 200, 
+              areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1)
+elements <- list(elem1, elem2, elem3, elem4, elem5, elem6)
+rows <- lapply(elements, function(elem) {
+    lapply(dimensionxval, function(x){
+      elem[[dimensionx]] <- x
+      elem
+    })
+})
+```
+
+## Run the Calculation
+
+The calculation can be run using one simple function.
+The results are the needed rounds for all scenarios of the configuration.
+
+```{r gen-data}
+data <- calculateScenarios(rows)
+```
+
+## Plot the results
+
+Afterwards, the results can be plotted as a line diagram.
+```{r plot, fig.width = 7, fig.height = 6}
+plotEvaluation(data, elements, "Threshold", dimensionxval)
+```
+  
