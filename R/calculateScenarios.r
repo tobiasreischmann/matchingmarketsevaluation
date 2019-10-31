@@ -58,7 +58,7 @@ calculateScenarios <- function(scenarios,nruns=10,nworkers=detectCores()) {
 
   library(digest)
   hash <- digest(scenarios)
-  filename <- paste('/tmp/',hash,'.rds',sep='')
+  filename <- paste('~/matchingmarketsevaluation-data/',hash,'.rds',sep='')
   if (file.exists(filename)) {
     return(readRDS(filename))
   }

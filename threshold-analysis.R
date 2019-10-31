@@ -1,37 +1,17 @@
----
-title: "Threshold Analysis"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{threshold-analysis}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r, include = FALSE}
+## ---- include = FALSE----------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-```
 
-## Setup
 
-To get things running you have to included the matchingMarketsEvaluation package and some other requirements.
-Note that the matchingMarketsEvaluation package is currently based on the function `stabsim3`, which is not yet available in the official package. Please see [github.com/tobiasreischmann/matchingMarkets](https://github.com/tobiasreischmann/matchingMarkets/tree/feature/kita-simulation) for a current development state.
-
-```{r setup}
+## ----setup---------------------------------------------------------------
 library(parallel)
 library(matchingMarkets)
 library(matchingMarketsEvaluation)
-```
 
-## Configuration
 
-The package offers evaluation techniques to show how variations of different parameters influence the number of rounds needed for the execution of the decentralized college admission mechanism.
-The following code specifies a configuration analysing the mechanism for different values of the cut-off threshold.
-This threshold states, how many matchings are tolerated to be different from a full run of the algorithm if we select the results after an earlier round.
-
-```{r configuration}
+## ----configuration-------------------------------------------------------
 dimensionxval <- c(0.07,0.05,0.02,0.01,0.005,0.002,0.001)
 dimensionxlabels <- percent(dimensionxval, digits = 1)
 dimensionx <- "threshold"
@@ -55,21 +35,12 @@ rows <- lapply(elements, function(elem) {
       elem
     })
 })
-```
 
-## Run the Calculation
 
-The calculation can be run using one simple function.
-The results are the needed rounds for all scenarios of the configuration.
-
-```{r gen-data}
+## ----gen-data------------------------------------------------------------
 data <- calculateScenarios(rows)
-```
 
-## Plot the results
 
-Afterwards, the results can be plotted as a line diagram.
-```{r plot, fig.width = 7, fig.height = 6}
+## ----plot, fig.width = 7, fig.height = 6---------------------------------
 plotEvaluation(data, elements, "Threshold", dimensionxval)
-```
-  
+

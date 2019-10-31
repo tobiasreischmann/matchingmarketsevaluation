@@ -32,22 +32,22 @@ The following code specifies a configuration analysing the mechanism for differe
 This threshold states, how many matchings are tolerated to be different from a full run of the algorithm if we select the results after an earlier round.
 
 ```{r configuration}
-dimensionxval <- c(0.07,0.05,0.02,0.01,0.005,0.002,0.001)
-dimensionxlabels <- percent(dimensionxval, digits = 1)
-dimensionx <- "threshold"
+dimensionxval <- c(1,2,3)
+dimensionxlabels <- paste("Scenario ", dimensionxval)
+dimensionx <- "horizontalscenario"
 
 elem1 <- list(occupancyrate = 1.2, quota = .6, nStudents = 2700, nColleges = 60, 
-              areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
+              areasize = 7, conf.s.prefs = c(3,7,10,10), threshold = .05)
 elem2 <- list(occupancyrate = .8, quota = .6, nStudents = 2700, nColleges = 60, 
-              areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
+              areasize = 7, conf.s.prefs = c(3,7,10,10), threshold = .05)
 elem5 <- list(occupancyrate = 1.2, quota = .6, nStudents = 600, nColleges = 200, 
-              areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1)
+              areasize = 6, conf.s.prefs = c(2,5,6,7), threshold = .05)
 elem3 <- list(occupancyrate = 1.2, quota = .3, nStudents = 2700, nColleges = 60, 
-              areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
+              areasize = 7, conf.s.prefs = c(3,7,10,10), threshold = .05)
 elem4 <- list(occupancyrate = .8, quota = .3, nStudents = 2700, nColleges = 60, 
-              areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
+              areasize = 7, conf.s.prefs = c(3,7,10,10), threshold = .05)
 elem6 <- list(occupancyrate = .8, quota = .3, nStudents = 600, nColleges = 200, 
-              areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1)
+              areasize = 6, conf.s.prefs = c(2,5,6,7), threshold = .05)
 elements <- list(elem1, elem2, elem3, elem4, elem5, elem6)
 rows <- lapply(elements, function(elem) {
     lapply(dimensionxval, function(x){
@@ -56,7 +56,7 @@ rows <- lapply(elements, function(elem) {
     })
 })
 ```
-
+    
 ## Run the Calculation
 
 The calculation can be run using one simple function.
@@ -70,6 +70,6 @@ data <- calculateScenarios(rows)
 
 Afterwards, the results can be plotted as a line diagram.
 ```{r plot, fig.width = 7, fig.height = 6}
-plotEvaluation(data, elements, "Threshold", dimensionxval)
+plotEvaluation(data, elements, "Horizontal Preference Structure", dimensionxval)
 ```
   
