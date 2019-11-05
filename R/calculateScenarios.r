@@ -60,7 +60,16 @@ calculateScenarios <- function(scenarios,nruns=10,nworkers=detectCores()) {
   hash <- digest(scenarios)
   filename <- paste('~/matchingmarketsevaluation-data/',hash,'.rds',sep='')
   if (file.exists(filename)) {
-    return(readRDS(filename))
+    initialresults <- readRDS(filename)
+    for (i in 1:length(scenarios)) {
+      for (j in 1:length(scenarios[[i]])) {
+        if (length(initialresults) >= i &&
+            length(initialresults[[i]]) >= j &&
+            is.numeric(initialresults[[i]][[j]])) {
+            scenarios[[i]][[j]]$cache <- TRUE
+        }
+      }
+    }
   }
 
   equaldist <- function(x) {
@@ -76,6 +85,9 @@ calculateScenarios <- function(scenarios,nruns=10,nworkers=detectCores()) {
   ######### Run ##############
   applyresults <- lapply(scenarios, function(elements) {
     rowresults <- mclapply(elements, function(elem) { # Loop over elements
+      if (!is.null(elem$cache)) {
+        return(NULL);
+      }
       occupancy <- elem$occupancyrate
       nStudents <- elem$nStudents
       nColleges <- elem$nColleges
@@ -132,6 +144,18 @@ calculateScenarios <- function(scenarios,nruns=10,nworkers=detectCores()) {
 
     }, mc.silent=FALSE, mc.cores=nworkers)
   })
+  if (exists("initialresults")) {
+    for (i in 1:length(scenarios)) {
+      for (j in 1:length(scenarios[[i]])) {
+        if (length(initialresults) >= i &&
+            length(initialresults[[i]]) >= j &&
+            is.numeric(initialresults[[i]][[j]])) {
+          applyresults[[i]][[j]] <- initialresults[[i]][[j]]
+        }
+      }
+    }
+  }
+
   saveRDS(applyresults, file = filename)
   return(applyresults)
 }

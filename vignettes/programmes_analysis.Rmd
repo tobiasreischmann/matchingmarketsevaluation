@@ -1,8 +1,8 @@
 ---
-title: "Quota Analysis"
+title: "Threshold Analysis"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{quota-analysis}
+  %\VignetteIndexEntry{threshold-analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -28,15 +28,15 @@ library(matchingMarketsEvaluation)
 ## Configuration
 
 The package offers evaluation techniques to show how variations of different parameters influence the number of rounds needed for the execution of the decentralized college admission mechanism.
-The following code specifies a configuration analysing the mechanism for different values of the private facility quota.
-This quota states, how many facilities participate manually in the mechanism.
+The following code specifies a configuration analysing the mechanism for different values of the cut-off threshold.
+This threshold states, how many matchings are tolerated to be different from a full run of the algorithm if we select the results after an earlier round.
 
 ```{r configuration}
-body(quota_configuration)
+body(programmes_configuration)
 ```
 
 ```{r run_configuration, include=FALSE}
-quota_configuration()
+programmes_configuration()
 ```
 
 ## Run the Calculation
@@ -52,6 +52,6 @@ data <- calculateScenarios(rows)
 
 Afterwards, the results can be plotted as a line diagram.
 ```{r plot, fig.width = 7, fig.height = 6}
-plotEvaluation(data, elements, "Private Facility Quota", dimensionxval)
+plotEvaluation(data, elements, "Number of Students", dimensionxval)
 ```
   

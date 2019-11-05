@@ -52,7 +52,7 @@ plotEvaluation <- function(data, configuration, dimensionx, dimensionxvals) {
   translationsForResults <- list("occupancyrate"=identity, "quota" = percent, "nStudents" = identity, "nColleges" = identity, "threshold" = percent)
 
   #Initialize Plot
-  par(mfrow=c(1, 1), mar=c(4, 4, 3, 3),xpd=FALSE)
+  par(mar=c(4, 4, 3, 3),xpd=FALSE)
   plot(NULL, xlim=c(1,length(dimensionxval)),ylim = c(0,15), xaxt = 'n', yaxt = 'n', xlab = dimensionx, ylab = 'Iterations')
   axis(side=1, at=c(1:length(dimensionxval)), labels = dimensionxlabels, col = NA, col.ticks = 1)
   axis(side=2, at=(0:7)*2, labels = (0:7)*2, col = NA, col.ticks = 1)
