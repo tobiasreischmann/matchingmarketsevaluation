@@ -46,16 +46,31 @@ percent <- function(x, digits = 0) {
 #'
 #' xdata <- calculateScenarios(scenarios, nruns=2)
 #' plotEvaluation(xdata, elements, "Threshold", xdimensionvals)
-plotEvaluation <- function(data, configuration, dimensionx, dimensionxvals) {
-  relevantForLegend <- c("occupancyrate", "quota", "nStudents", "nColleges")
-  translationsForLegend <- list("occupancyrate"="Occupancy rate:", "quota" = "Private quota:", "nStudents" = "#Children:", "nColleges" = "#Programmes:  ")
-  translationsForResults <- list("occupancyrate"=identity, "quota" = percent, "nStudents" = identity, "nColleges" = identity, "threshold" = percent)
+plotEvaluation <- function(data, configuration, dimensionx, dimensionxvals, relevantForLegend = NULL, maxy = 14) {
+  if (is.null(relevantForLegend)) {
+    relevantForLegend <- c("occupancyrate", "quota", "nStudents", "nColleges")
+  }
+
+  tierstranslation = function(x) {
+    tiers = "w/"
+    if (sum(x) == length(x)) {
+     tiers = paste(tiers, "o", sep = "")
+    }
+    tiers = paste(tiers, " (", sum(x), ")", sep = "")
+    tiers
+  }
+
+  translationsForLegend <- list("occupancyrate"="Occ. rate:", "quota" = "Pri. quota:", "nStudents" = "#Children:", "nColleges" = "#Prog.:",
+                                "conf.s.prefs"="Tiers:")
+  translationsForResults <- list("occupancyrate"=identity, "quota" = percent, "nStudents" = identity, "nColleges" = identity, "threshold" = percent,
+                                 "conf.s.prefs" = tierstranslation)
 
   #Initialize Plot
-  par(mar=c(4, 4, 3, 3),xpd=FALSE)
-  plot(NULL, xlim=c(1,length(dimensionxval)),ylim = c(0,15), xaxt = 'n', yaxt = 'n', xlab = dimensionx, ylab = 'Iterations')
+  par(xpd=FALSE)
+  plot(NULL, xlim=c(0.8,length(dimensionxval)+.2),ylim = c(0,maxy + 1), xaxt = 'n', yaxt = 'n', xlab = '', ylab = 'Played rounds',mgp=c(3,1,0))
   axis(side=1, at=c(1:length(dimensionxval)), labels = dimensionxlabels, col = NA, col.ticks = 1)
-  axis(side=2, at=(0:7)*2, labels = (0:7)*2, col = NA, col.ticks = 1)
+  axis(side=2, at=(0:(maxy/2))*2, labels = (0:(maxy/2))*2, col = NA, col.ticks = 1, mgp=c(3,1,0))
+  title(xlab=dimensionx)
   abline(h=6,col='red')
 
   colors = colors()[c(73,74,139,116,143, 50)]

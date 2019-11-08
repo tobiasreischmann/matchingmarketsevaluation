@@ -93,7 +93,7 @@ calculateScenarios <- function(scenarios,nruns=10,nworkers=detectCores()) {
       nColleges <- elem$nColleges
       threshold <- elem$threshold
       areasize <- elem$areasize
-      j <- elem$horizontalscenario
+      scenario <- elem$horizontalscenario
       s.prefs.count = elem$conf.s.prefs
       quota <- elem$quota
 
@@ -107,6 +107,28 @@ calculateScenarios <- function(scenarios,nruns=10,nworkers=detectCores()) {
       private <- function(x) {
         runif(x) < quota
       }
+      if (scenario == 1) {
+        scenariomodel = as.formula("~ I((1000**(firstpref %% 3)) * (abs(cx-sx)<=1) * (abs(cy-sy)<=1))
+        + I((1000**((firstpref + secondpref) %% 3)) * social)
+        + I((1000**((firstpref - secondpref) %% 3)) * private * ceiling((cidio1 + sidio1 %% 1) * 100))")
+      }
+      if (scenario == 2) {
+        scenariomodel = as.formula("~ I(social)")
+      }
+      if (scenario == 3) {
+        scenariomodel = as.formula("~ I(ceiling((cidio1 + sidio1 %% 1) * 100))")
+      }
+      if (scenario == 4) {
+        scenariomodel = as.formula("~ I((abs(cx-sx)<=1) * (abs(cy-sy)<=1))")
+      }
+
+      collegemodel = as.formula("~ I(-idist * 2 * sqrt(((cx-sx))**2 + ((cy-sy))**2)/areasize)
+                             + I(iquality * quality)
+                             + I(iidio * (cidiocat == sidiocat))")
+      if (scenario == 5) {
+        scenariomodel = as.formula("~ I(social)")
+        collegemodel = as.formula("~ I(iquality * quality)")
+      }
 
       daresult <- stabsim3(m=nruns, nStudents=nStudents, nSlots=nSlots, verbose=FALSE,
                            colleges = c("cx","cy", "firstpref", "secondpref", "quality", "cidiocat", "cidio1", "cidio2", "private"),
@@ -115,14 +137,10 @@ calculateScenarios <- function(scenarios,nruns=10,nworkers=detectCores()) {
                            students_fun = c(category(areasize),category(areasize),category(100),category(10),equaldist,equaldist,equaldist,equaldist,equaldist),
                            outcome = ~ I(sqrt(((cx-sx)/areasize)**2 + ((cy-sy)/areasize)**2)),
                            selection = c(
-                             student = ~ I((1000**(firstpref %% 3)) * ((private + j) < 2) * (abs(cx-sx)<=1) * (abs(cy-sy)<=1))
-                             + I((1000**((firstpref + secondpref) %% 3)) * social)
-                             + I((1000**((firstpref - secondpref) %% 3)) * private * ceiling((cidio1 + sidio1 %% 1) * 100))
+                             student = scenariomodel
                              #+ I((1000**((firstpref - secondpref) %% 3)) * private * (cidiocat == sidiocat) )
                              ,
-                             colleges = ~ I(-idist * 2 * sqrt(((cx-sx))**2 + ((cy-sy))**2)/areasize)
-                             + I(iquality * quality)
-                             + I(iidio * (cidiocat == sidiocat))
+                             colleges = collegemodel
                            ),
                            private_college_quota = quota,
                            count.waitinglist = function(x) {x}, s.prefs.count = s.prefs.count)

@@ -1,4 +1,6 @@
 require(matchingMarketsEvaluation)
+require(matchingMarkets)
+require(parallel)
 
 generate <- function(configuration) {
   cl <- call(configuration)
@@ -12,4 +14,4 @@ generate("occupancy_configuration")
 generate("programmes_configuration")
 generate("quota_configuration")
 generate("threshold_configuration")
-generate("tiers_configuration")
+generate("size_configuration")
