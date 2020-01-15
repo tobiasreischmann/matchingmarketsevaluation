@@ -95,3 +95,88 @@ plotEvaluation <- function(data, configuration, dimensionx, dimensionxvals, rele
   rowsrange <- 1:length(data)
   legend('topright', legend = legendentries, col = colors[rowsrange], lty = rowsrange, pch = 1, cex=.8)
 }
+
+plotEvaluation2 <- function(data, configuration, dimensionx, dimensionxvals, relevantForLegend = NULL, maxy = 14) {
+  if (is.null(relevantForLegend)) {
+    relevantForLegend <- c("occupancyrate", "quota", "nStudents", "nColleges")
+  }
+
+  tierstranslation = function(x) {
+    tiers = "w/"
+    if (sum(x) == length(x)) {
+      tiers = paste(tiers, "o", sep = "")
+    }
+    tiers = paste(tiers, " (", sum(x), ")", sep = "")
+    tiers
+  }
+
+  translationsForLegend <- list("occupancyrate"="Occ. rate:", "quota" = "Pri. quota:", "nStudents" = "#Children:", "nColleges" = "#Prog.:",
+                                "conf.s.prefs"="Tiers:")
+  translationsForResults <- list("occupancyrate"=identity, "quota" = percent, "nStudents" = identity, "nColleges" = identity, "threshold" = percent,
+                                 "conf.s.prefs" = tierstranslation)
+
+  legendentries <- lapply(configuration, function(elem) {
+    entries = c()
+    for (dim in relevantForLegend) {
+      entry <- paste0(c(translationsForLegend[[dim]], translationsForResults[[dim]](elem[[dim]])), collapse=" ")
+      entries <- cbind(entries, entry)
+    }
+    paste(entries, collapse=", ")
+  })
+  #rowsrange <- 1:length(data)
+  #legend('topright', legend = legendentries, col = colors[rowsrange], lty = rowsrange, pch = 1, cex=.8)
+
+  xval <- as.factor(rep(1:length(dimensionxval),length(configuration)))
+  conf <- as.factor(unlist(lapply(1:length(configuration),function(x){rep(legendentries[x],length(dimensionxval))})))
+  rounds <- as.vector(unlist(data))
+  data <- data.frame(xval,conf,rounds)
+  library(ggplot2)
+  ggplot(data=data, aes(x=xval, y=rounds, group = conf)) +
+    geom_line(aes(colour = conf))  +
+    xlab(dimensionx) +
+    ylab("Played Rounds") +
+    # labs(subtitle=paste("(share of private facilities =",quota,")")) +
+    #guides(fill=guide_legend(title="Legend")) +
+    theme_classic() +
+    scale_x_discrete(breaks=1:length(dimensionxval), labels = dimensionxlabels) +
+    scale_y_continuous(breaks=1:maxy, limits=c(1,maxy)) +
+    scale_colour_discrete(name="Legend") +
+    # geom_abline(slope=0, intercept=y*complete*.95,  col = "black",lty=2) +
+    theme(
+      legend.position = c(.1, .925),
+      legend.justification = c("left", "top"),
+      legend.box.just = "left",
+      legend.margin = margin(6, 6, 6, 6),
+      legend.text=element_text(size=rel(0.8)),
+      legend.box.background = element_rect(colour = "black")))
+
+  #Initialize Plot
+  # par(xpd=FALSE)
+  # plot(NULL, xlim=c(0.8,length(dimensionxval)+.2),ylim = c(0,maxy + 1), xaxt = 'n', yaxt = 'n', xlab = '', ylab = 'Played rounds',mgp=c(3,1,0))
+  # axis(side=1, at=c(1:length(dimensionxval)), labels = dimensionxlabels, col = NA, col.ticks = 1)
+  # axis(side=2, at=(0:(maxy/2))*2, labels = (0:(maxy/2))*2, col = NA, col.ticks = 1, mgp=c(3,1,0))
+  # title(xlab=dimensionx)
+  # abline(h=6,col='red')
+  #
+  # colors = colors()[c(73,74,139,116,143, 50)]
+  #
+  #
+  # for (i in c(1:length(data))) {
+  #   if (is.null(data[[i]])) {
+  #     #results[i,j,r,o] <- array()
+  #     print("Empty result occured")
+  #   } else {
+  #     lines(unlist(data[[i]]), pch = 1, type = "b", lty = i, col=colors[i])
+  #   }
+  # }
+  # legendentries <- lapply(configuration, function(elem) {
+  #   entries = c()
+  #   for (dim in relevantForLegend) {
+  #     entry <- paste0(c(translationsForLegend[[dim]], translationsForResults[[dim]](elem[[dim]])), collapse=" ")
+  #     entries <- cbind(entries, entry)
+  #   }
+  #   paste(entries, collapse=", ")
+  # })
+  # rowsrange <- 1:length(data)
+  # legend('topright', legend = legendentries, col = colors[rowsrange], lty = rowsrange, pch = 1, cex=.8)
+}
