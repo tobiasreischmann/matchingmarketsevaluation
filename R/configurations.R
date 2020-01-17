@@ -47,15 +47,20 @@ occupancy_configuration <- function() {
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05)
   elem2 <- list(quota = .6, nStudents = 2700, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05)
-  elem5 <- list(quota = .6, nStudents = 600, nColleges = 200,
-                areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1, threshold = .05)
   elem3 <- list(quota = .3, nStudents = 2700, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05)
   elem4 <- list(quota = .3, nStudents = 2700, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05)
+  elem5 <- list(quota = .6, nStudents = 600, nColleges = 200,
+                areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1, threshold = .05)
   elem6 <- list(quota = .3, nStudents = 600, nColleges = 200,
                 areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1, threshold = .05)
-  elements <<- list(elem1, elem2, elem3, elem4, elem5, elem6)
+  elements <<- list(elem1,
+                    #elem2,
+                    elem3,
+                    #elem4,
+                    elem5,
+                    elem6)
   rows <<- lapply(elements, function(elem) {
     lapply(dimensionxval, function(x){
       elem[[dimensionx]] <- x
@@ -310,7 +315,7 @@ places_configuration <- function() {
 #'
 quota_configuration <- function() {
   dimensionxval <<- c(0:10/10)
-  dimensionxlabels <<- percent(dimensionxval, digits = 1)
+  dimensionxlabels <<- percent(dimensionxval, digits = 0)
   dimensionx <- "quota"
 
   elem1 <- list(occupancyrate = 1.2,nStudents = 2700, nColleges = 60,

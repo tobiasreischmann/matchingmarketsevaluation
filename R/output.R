@@ -126,29 +126,42 @@ plotEvaluation2 <- function(data, configuration, dimensionx, dimensionxvals, rel
   #rowsrange <- 1:length(data)
   #legend('topright', legend = legendentries, col = colors[rowsrange], lty = rowsrange, pch = 1, cex=.8)
 
+  ycord <- 1:maxy
+  if (maxy > 14) {
+    ycord <- (1:(maxy/2))*2
+  }
+
   xval <- as.factor(rep(1:length(dimensionxval),length(configuration)))
   conf <- as.factor(unlist(lapply(1:length(configuration),function(x){rep(legendentries[x],length(dimensionxval))})))
   rounds <- as.vector(unlist(data))
   data <- data.frame(xval,conf,rounds)
   library(ggplot2)
   ggplot(data=data, aes(x=xval, y=rounds, group = conf)) +
-    geom_line(aes(colour = conf))  +
+    geom_rect(aes(xmin=0, xmax=Inf, ymin=6, ymax=9), fill="#DDDDDD") +
+    geom_line(aes(colour = conf, linetype = conf))  +
+    geom_point(aes(colour = conf)) +
+#    geom_ribbon(aes(ymax=9, ymin=6), fill="gray", alpha=.1) +
     xlab(dimensionx) +
     ylab("Played Rounds") +
     # labs(subtitle=paste("(share of private facilities =",quota,")")) +
     #guides(fill=guide_legend(title="Legend")) +
     theme_classic() +
     scale_x_discrete(breaks=1:length(dimensionxval), labels = dimensionxlabels) +
-    scale_y_continuous(breaks=1:maxy, limits=c(1,maxy)) +
-    scale_colour_discrete(name="Legend") +
+    scale_y_continuous(breaks=ycord) +
+    coord_cartesian(ylim=c(1,maxy)) +
+    #scale_colour_discrete(name="Legend") +
     # geom_abline(slope=0, intercept=y*complete*.95,  col = "black",lty=2) +
     theme(
-      legend.position = c(.1, .925),
+      legend.position = c(.02, 1),
       legend.justification = c("left", "top"),
       legend.box.just = "left",
-      legend.margin = margin(6, 6, 6, 6),
-      legend.text=element_text(size=rel(0.8)),
-      legend.box.background = element_rect(colour = "black")))
+      #legend.margin = margin(6, 6, 6, 6),
+      legend.text=element_text(size=rel(0.65)),
+      legend.key.size = unit(.4, 'cm'),
+      legend.title=element_text(size=0),
+      #legend.title=theme_blank()
+      legend.box.background = element_rect(colour = "black"),
+      axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)))
 
   #Initialize Plot
   # par(xpd=FALSE)
