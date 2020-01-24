@@ -60,15 +60,15 @@ plotEvaluation <- function(data, configuration, dimensionx, dimensionxvals, rele
     tiers
   }
 
-  translationsForLegend <- list("occupancyrate"="Occ. rate:", "quota" = "Pri. quota:", "nStudents" = "#Children:", "nColleges" = "#Prog.:",
+  translationsForLegend <- list("occupancyrate"="Occ. rate:", "quota" = "Pri. share:", "nStudents" = "#Children:", "nColleges" = "#Prog.:",
                                 "conf.s.prefs"="Tiers:")
   translationsForResults <- list("occupancyrate"=identity, "quota" = percent, "nStudents" = identity, "nColleges" = identity, "threshold" = percent,
                                  "conf.s.prefs" = tierstranslation)
 
   #Initialize Plot
   par(xpd=FALSE)
-  plot(NULL, xlim=c(0.8,length(dimensionxval)+.2),ylim = c(0,maxy + 1), xaxt = 'n', yaxt = 'n', xlab = '', ylab = 'Played rounds',mgp=c(3,1,0))
-  axis(side=1, at=c(1:length(dimensionxval)), labels = dimensionxlabels, col = NA, col.ticks = 1)
+  plot(NULL, xlim=c(0.8,length(dimensionxvals)+.2),ylim = c(0,maxy + 1), xaxt = 'n', yaxt = 'n', xlab = '', ylab = 'Played rounds',mgp=c(3,1,0))
+  axis(side=1, at=c(1:length(dimensionxvals)), labels = dimensionxlabels, col = NA, col.ticks = 1)
   axis(side=2, at=(0:(maxy/2))*2, labels = (0:(maxy/2))*2, col = NA, col.ticks = 1, mgp=c(3,1,0))
   title(xlab=dimensionx)
   abline(h=6,col='red')
@@ -110,7 +110,7 @@ plotEvaluation2 <- function(data, configuration, dimensionx, dimensionxvals, rel
     tiers
   }
 
-  translationsForLegend <- list("occupancyrate"="Occ. rate:", "quota" = "Pri. quota:", "nStudents" = "#Children:", "nColleges" = "#Prog.:",
+  translationsForLegend <- list("occupancyrate"="Occ. rate:", "quota" = "Pri. share:", "nStudents" = "#Children:", "nColleges" = "#Prog.:",
                                 "conf.s.prefs"="Tiers:")
   translationsForResults <- list("occupancyrate"=identity, "quota" = percent, "nStudents" = identity, "nColleges" = identity, "threshold" = percent,
                                  "conf.s.prefs" = tierstranslation)
@@ -123,73 +123,44 @@ plotEvaluation2 <- function(data, configuration, dimensionx, dimensionxvals, rel
     }
     paste(entries, collapse=", ")
   })
-  #rowsrange <- 1:length(data)
-  #legend('topright', legend = legendentries, col = colors[rowsrange], lty = rowsrange, pch = 1, cex=.8)
+
+  # Calculate legend order
+  legendorder <- data.frame(unlist(legendentries),as.numeric(unlist(sapply(data,cbind)[length(dimensionxvals),])))
+  names(legendorder) <- c("Legend", "Values")
+  legendorder <- legendorder[order(legendorder$Values, decreasing = TRUE),]
 
   ycord <- 1:maxy
   if (maxy > 14) {
     ycord <- (1:(maxy/2))*2
   }
 
-  xval <- as.factor(rep(1:length(dimensionxval),length(configuration)))
-  conf <- as.factor(unlist(lapply(1:length(configuration),function(x){rep(legendentries[x],length(dimensionxval))})))
+  xval <- as.factor(rep(1:length(dimensionxvals),length(configuration)))
+  conf <- as.factor(unlist(lapply(1:length(configuration),function(x){rep(legendentries[x],length(dimensionxvals))})))
   rounds <- as.vector(unlist(data))
-  data <- data.frame(xval,conf,rounds)
+  procdata <- data.frame(xval,conf,rounds)
   library(ggplot2)
-  ggplot(data=data, aes(x=xval, y=rounds, group = conf)) +
+  ggplot(data=procdata, aes(x=xval, y=rounds, group = conf)) +
     geom_rect(aes(xmin=0, xmax=Inf, ymin=6, ymax=9), fill="#DDDDDD") +
     geom_line(aes(colour = conf, linetype = conf))  +
-    geom_point(aes(colour = conf)) +
-#    geom_ribbon(aes(ymax=9, ymin=6), fill="gray", alpha=.1) +
+    geom_point(shape=1, aes(colour = conf)) +
     xlab(dimensionx) +
     ylab("Played Rounds") +
-    # labs(subtitle=paste("(share of private facilities =",quota,")")) +
-    #guides(fill=guide_legend(title="Legend")) +
     theme_classic() +
-    scale_x_discrete(breaks=1:length(dimensionxval), labels = dimensionxlabels) +
+    scale_x_discrete(breaks=1:length(dimensionxvals), labels = dimensionxlabels) +
     scale_y_continuous(breaks=ycord) +
+    scale_color_discrete(breaks=as.vector(legendorder[,1])) +
+    scale_linetype_discrete(breaks=as.vector(legendorder[,1])) +
+    scale_shape_manual(values=21) +
     coord_cartesian(ylim=c(1,maxy)) +
-    #scale_colour_discrete(name="Legend") +
-    # geom_abline(slope=0, intercept=y*complete*.95,  col = "black",lty=2) +
     theme(
       legend.position = c(.02, 1),
       legend.justification = c("left", "top"),
       legend.box.just = "left",
-      #legend.margin = margin(6, 6, 6, 6),
       legend.text=element_text(size=rel(0.65)),
-      legend.key.size = unit(.4, 'cm'),
+      legend.key.size = unit(1, 'cm'),
+      legend.key.height = unit(.4, 'cm'),
       legend.title=element_text(size=0),
-      #legend.title=theme_blank()
       legend.box.background = element_rect(colour = "black"),
+      plot.margin = unit(c(1.5,0,0,1), "lines"),
       axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)))
-
-  #Initialize Plot
-  # par(xpd=FALSE)
-  # plot(NULL, xlim=c(0.8,length(dimensionxval)+.2),ylim = c(0,maxy + 1), xaxt = 'n', yaxt = 'n', xlab = '', ylab = 'Played rounds',mgp=c(3,1,0))
-  # axis(side=1, at=c(1:length(dimensionxval)), labels = dimensionxlabels, col = NA, col.ticks = 1)
-  # axis(side=2, at=(0:(maxy/2))*2, labels = (0:(maxy/2))*2, col = NA, col.ticks = 1, mgp=c(3,1,0))
-  # title(xlab=dimensionx)
-  # abline(h=6,col='red')
-  #
-  # colors = colors()[c(73,74,139,116,143, 50)]
-  #
-  #
-  # for (i in c(1:length(data))) {
-  #   if (is.null(data[[i]])) {
-  #     #results[i,j,r,o] <- array()
-  #     print("Empty result occured")
-  #   } else {
-  #     lines(unlist(data[[i]]), pch = 1, type = "b", lty = i, col=colors[i])
-  #   }
-  # }
-  # legendentries <- lapply(configuration, function(elem) {
-  #   entries = c()
-  #   for (dim in relevantForLegend) {
-  #     entry <- paste0(c(translationsForLegend[[dim]], translationsForResults[[dim]](elem[[dim]])), collapse=" ")
-  #     entries <- cbind(entries, entry)
-  #   }
-  #   paste(entries, collapse=", ")
-  # })
-  # rowsrange <- 1:length(data)
-  # legend('topright', legend = legendentries, col = colors[rowsrange], lty = rowsrange, pch = 1, cex=.8)
 }
