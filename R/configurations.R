@@ -20,7 +20,7 @@ example_configuration <- function() {
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
   elem4 <- list(occupancyrate = .8, quota = .3, nStudents = 2000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
-  elem6 <- list(occupancyrate = 1.2, quota = .3 nStudents = 1000, nColleges = 300,
+  elem6 <- list(occupancyrate = 1.2, quota = .3, nStudents = 1000, nColleges = 300,
                 areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1)
   elements <<- list(elem1, elem2, elem3, elem4, elem5, elem6)
   rows <<- lapply(elements, function(elem) {
