@@ -54,7 +54,11 @@
 #' })
 #'
 #' xdata <- calculateScenarios(scenarios, nruns=2)
-calculateScenarios <- function(scenarios,nruns=10,nworkers=detectCores()) {
+calculateScenarios <- function(scenarios,nruns=10,nworkers=detectCores(),seed=NULL) {
+
+  if (!is.null(seed)) {
+    set.seed(seed = seed)
+  }
 
   library(digest)
   hash <- digest(scenarios)
