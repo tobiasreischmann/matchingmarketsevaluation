@@ -148,8 +148,8 @@ plotEvaluation2 <- function(data, configuration, dimensionx, dimensionxvals, rel
     theme_classic() +
     scale_x_discrete(breaks=1:length(dimensionxvals), labels = dimensionxlabels) +
     scale_y_continuous(breaks=ycord) +
-    scale_color_discrete(breaks=as.vector(legendorder[,1])) +
-    scale_linetype_discrete(breaks=as.vector(legendorder[,1])) +
+    scale_color_grey(start = 0, end = 0.6, breaks=as.vector(legendorder[,1]), guide="legend") +
+    scale_linetype_discrete(breaks=as.vector(legendorder[,1]), guide="legend") +
     scale_shape_manual(values=21) +
     coord_cartesian(ylim=c(1,maxy)) +
     theme(
