@@ -14,6 +14,9 @@
 
 #' @title Simulate multiple scenarios for the college admissions problem
 #'
+#' @description This function simulates multiple scenarios for the iterative deferred acceptance mechanism with ties, implemented as stabsim3 within the matchingmarkets package.
+#' The results can be used to analyse the number of rounds necessary for the market to be cleared up to a specified threshold.
+#'
 #' @param scenarios list of lists containing the different scenarios.
 #' @param nruns integer indicating the number of markets to be simulated (results are averaged over all simulated markets).
 #' @param nworkers integer number of workers generated for the parallel package.

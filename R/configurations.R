@@ -1,3 +1,14 @@
+
+# ----------------------------------------------------------------------------
+# R-code representing the different scenario configurations of the simulation.
+#
+# Copyright (c) 2019 Tobias Reischmann
+#
+# This library is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file LICENSE
+#
+# ----------------------------------------------------------------------------
+
 #' Configuration for Example Analysis
 #'
 #' @return formatted string
