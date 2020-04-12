@@ -176,7 +176,7 @@ plotEvaluation2 <- function(data, configuration, dimensionx, dimensionxvals, rel
     geom_line(aes(colour = conf, linetype = conf))  +
     geom_point(shape=1, aes(colour = conf)) +
     xlab(dimensionx) +
-    ylab("Played Rounds") +
+    ylab("Iterations") +
     theme_classic() +
     scale_x_discrete(breaks=1:length(dimensionxvals), labels = dimensionxlabels) +
     scale_y_continuous(breaks=ycord) +
@@ -193,6 +193,6 @@ plotEvaluation2 <- function(data, configuration, dimensionx, dimensionxvals, rel
       legend.key.height = unit(.4, 'cm'),
       legend.title=element_text(size=0),
       legend.box.background = element_rect(colour = "black"),
-      plot.margin = unit(c(1.5,0,0,1), "lines"),
+      plot.margin = unit(c(0,0,0,0), "lines"),
       axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)))
 }
