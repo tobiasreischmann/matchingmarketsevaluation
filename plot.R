@@ -25,7 +25,6 @@ p5 <- generate("programmes_configuration", "Number of applicants", c("occupancyr
 p6 <- generate("rankinglength_configuration", "Length of childrens ranking lists", c("occupancyrate", "quota", "nStudents", "nColleges"),maxy=18)
 p7 <- generate("size_configuration", "Market size (no. of applications / no. of programmes)", c("occupancyrate", "quota"),maxy=18)
 p8 <- generate("horizontal_configuration", "Preference Scenario", c("occupancyrate", "quota", "nStudents", "nColleges", "conf.s.prefs"),maxy=28)
-p9 <- generate("rankinglength_configuration", "Length of childrens ranking lists", c("occupancyrate", "quota", "nStudents", "nColleges"),maxy=18)
 
 pdf("plot1.pdf",width = 6, height = 4, pointsize = 14)
 p1
@@ -50,7 +49,4 @@ p7
 dev.off()
 pdf("plot8.pdf",width = 6, height = 4, pointsize = 14)
 p8
-dev.off()
-pdf("plot9.pdf",width = 6, height = 4, pointsize = 14)
-p9
 dev.off()
