@@ -10,17 +10,17 @@ example_configuration <- function() {
   dimensionxlabels <<- percent(dimensionxval, digits = 1)
   dimensionx <- "threshold"
 
-  elem1 <- list(occupancyrate = 1.2, quota = .6, nStudents = 2000, nColleges = 600,
+  elem1 <- list(occupancyrate = 1.2, quota = .6, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
-  elem2 <- list(occupancyrate = .8, quota = .6, nStudents = 2000, nColleges = 600,
+  elem2 <- list(occupancyrate = .8, quota = .6, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
-  elem5 <- list(occupancyrate = 1.2, quota = .6, nStudents = 1000, nColleges = 300,
+  elem5 <- list(occupancyrate = 1.2, quota = .6, nStudents = 1500, nColleges = 300,
                 areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1)
-  elem3 <- list(occupancyrate = 1.2, quota = .3, nStudents = 2000, nColleges = 600,
+  elem3 <- list(occupancyrate = 1.2, quota = .3, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
-  elem4 <- list(occupancyrate = .8, quota = .3, nStudents = 2000, nColleges = 600,
+  elem4 <- list(occupancyrate = .8, quota = .3, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
-  elem6 <- list(occupancyrate = 1.2, quota = .3, nStudents = 1000, nColleges = 300,
+  elem6 <- list(occupancyrate = 1.2, quota = .3, nStudents = 1500, nColleges = 300,
                 areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1)
   elements <<- list(elem1, elem2, elem3, elem4, elem5, elem6)
   rows <<- lapply(elements, function(elem) {
@@ -43,17 +43,17 @@ occupancy_configuration <- function() {
   dimensionxlabels <<- dimensionxval
   dimensionx <- "occupancyrate"
 
-  elem1 <- list(quota = .6, nStudents = 2000, nColleges = 600,
+  elem1 <- list(quota = .6, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05)
-  elem2 <- list(quota = .6, nStudents = 2000, nColleges = 600,
+  elem2 <- list(quota = .6, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05)
-  elem3 <- list(quota = .3, nStudents = 2000, nColleges = 600,
+  elem3 <- list(quota = .3, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05)
-  elem4 <- list(quota = .3, nStudents = 2000, nColleges = 600,
+  elem4 <- list(quota = .3, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05)
-  elem5 <- list(quota = .6, nStudents = 1000, nColleges = 300,
+  elem5 <- list(quota = .6, nStudents = 1500, nColleges = 300,
                 areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1, threshold = .05)
-  elem6 <- list(quota = .3, nStudents = 1000, nColleges = 300,
+  elem6 <- list(quota = .3, nStudents = 1500, nColleges = 300,
                 areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1, threshold = .05)
   elements <<- list(elem1,
                     #elem2,
@@ -114,17 +114,17 @@ tiers_configuration <- function() {
   dimensionxlabels <<- c("With Tiers", "Without Tiers")
   dimensionx <- "conf.s.prefs"
 
-  elem1 <- list(occupancyrate = 1.2, quota = .6, nStudents = 2000, nColleges = 600,
+  elem1 <- list(occupancyrate = 1.2, quota = .6, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = 1, horizontalscenario = 1, threshold = .05)
-  elem2 <- list(occupancyrate = .8, quota = .6, nStudents = 2000, nColleges = 600,
+  elem2 <- list(occupancyrate = .8, quota = .6, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = 1, horizontalscenario = 1, threshold = .05)
-  elem3 <- list(occupancyrate = 1.2, quota = .3, nStudents = 2000, nColleges = 600,
+  elem3 <- list(occupancyrate = 1.2, quota = .3, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = 1, horizontalscenario = 1, threshold = .05)
-  elem4 <- list(occupancyrate = .8, quota = .3, nStudents = 2000, nColleges = 600,
+  elem4 <- list(occupancyrate = .8, quota = .3, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = 1, horizontalscenario = 1, threshold = .05)
-  elem5 <- list(occupancyrate = 1.2, quota = .3, nStudents = 1000, nColleges = 300,
+  elem5 <- list(occupancyrate = 1.2, quota = .3, nStudents = 1500, nColleges = 300,
                 areasize = 6, conf.s.prefs = 2, horizontalscenario = 1, threshold = .05)
-  elem6 <- list(occupancyrate = 1.2, quota = .6, nStudents = 1000, nColleges = 300,
+  elem6 <- list(occupancyrate = 1.2, quota = .6, nStudents = 1500, nColleges = 300,
                 areasize = 6, conf.s.prefs = 2, horizontalscenario = 1, threshold = .05)
   elements <<- list(elem1, elem2, elem3, elem4, elem5, elem6)
   rows <<- lapply(elements, function(elem) {
@@ -147,17 +147,17 @@ horizontal_configuration <- function() {
   dimensionxlabels <<- c("Mixed\n preferences", "Vertical\n only", "Ideosyncratic\n only", "Horizontal\n only", "Both sides\n vertical only")
   dimensionx <- "horizontalscenario"
 
-  elem1 <- list(occupancyrate = 1.2, quota = .6, nStudents = 2000, nColleges = 600,
+  elem1 <- list(occupancyrate = 1.2, quota = .6, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), threshold = .05)
-  elem2 <- list(occupancyrate = 0.8, quota = .6, nStudents = 2000, nColleges = 600,
+  elem2 <- list(occupancyrate = 0.8, quota = .6, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), threshold = .05)
-  elem5 <- list(occupancyrate = 1.2, quota = .3, nStudents = 2000, nColleges = 600,
+  elem5 <- list(occupancyrate = 1.2, quota = .3, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), threshold = .05)
-  elem3 <- list(occupancyrate = 0.8, quota = .3, nStudents = 2000, nColleges = 600,
+  elem3 <- list(occupancyrate = 0.8, quota = .3, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), threshold = .05)
-  elem4 <- list(occupancyrate = 1.2, quota = .6, nStudents = 2000, nColleges = 600,
+  elem4 <- list(occupancyrate = 1.2, quota = .6, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = rep(1,100), threshold = .05)
-  elem6 <- list(occupancyrate = 1.2, quota = .3, nStudents = 2000, nColleges = 600,
+  elem6 <- list(occupancyrate = 1.2, quota = .3, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = rep(1,100), threshold = .05)
   elements <<- list(elem1, elem2, elem3, elem4, elem5, elem6)
   rows <<- lapply(elements, function(elem) {
@@ -180,17 +180,17 @@ threshold_configuration <- function() {
   dimensionxlabels <<- percent(dimensionxval, digits = 1)
   dimensionx <- "threshold"
 
-  elem1 <- list(occupancyrate = 1.2, quota = .6, nStudents = 2000, nColleges = 600,
+  elem1 <- list(occupancyrate = 1.2, quota = .6, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
-  elem2 <- list(occupancyrate = .8, quota = .6, nStudents = 2000, nColleges = 600,
+  elem2 <- list(occupancyrate = .8, quota = .6, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
-  elem5 <- list(occupancyrate = 1.2, quota = .6, nStudents = 1000, nColleges = 300,
+  elem5 <- list(occupancyrate = 1.2, quota = .6, nStudents = 1500, nColleges = 300,
                 areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1)
-  elem3 <- list(occupancyrate = 1.2, quota = .3, nStudents = 2000, nColleges = 600,
+  elem3 <- list(occupancyrate = 1.2, quota = .3, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
-  elem4 <- list(occupancyrate = .8, quota = .3, nStudents = 2000, nColleges = 600,
+  elem4 <- list(occupancyrate = .8, quota = .3, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
-  elem6 <- list(occupancyrate = 1.2, quota = .3, nStudents = 1000, nColleges = 300,
+  elem6 <- list(occupancyrate = 1.2, quota = .3, nStudents = 1500, nColleges = 300,
                 areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1)
   elements <<- list(elem1, elem2, elem3, elem4, elem5, elem6)
   rows <<- lapply(elements, function(elem) {
@@ -211,56 +211,50 @@ threshold_configuration <- function() {
 size_configuration <- function() {
   dimensionxval <<- list(
     list(
-      nStudents = 50,
-      nColleges = 15,
-      areasize = 2,
-      conf.s.prefs = c(1,2,2)
-    ),
-    list(
-      nStudents = 200,
-      nColleges = 60,
+      nStudents = 250,
+      nColleges = 50,
       areasize = 2,
       conf.s.prefs = c(2,3,5)
     ),
     list(
       nStudents = 500,
-      nColleges = 150,
+      nColleges = 100,
       areasize = 3,
       conf.s.prefs = c(2,3,5)
     ),
     list(
       nStudents = 1000,
-      nColleges = 300,
+      nColleges = 200,
       areasize = 6,
       conf.s.prefs = c(2,5,6,7)
     ),
     list(
       nStudents = 2000,
-      nColleges = 600,
+      nColleges = 400,
       areasize = 7,
       conf.s.prefs = c(3,7,10,10)
     ),
     list(
       nStudents = 3000,
-      nColleges = 900,
+      nColleges = 600,
       areasize = 8,
       conf.s.prefs = c(3,7,10,10)
     ),
     list(
       nStudents = 4000,
-      nColleges = 1200,
+      nColleges = 800,
       areasize = 9,
       conf.s.prefs = c(4,8,8,10,10)
     ),
     list(
       nStudents = 5000,
-      nColleges = 1500,
+      nColleges = 1000,
       areasize = 10,
       conf.s.prefs = c(4,8,8,10,10)
     ),
     list(
       nStudents = 6000,
-      nColleges = 1800,
+      nColleges = 1200,
       areasize = 12,
       conf.s.prefs = c(4,8,8,10,10,10)
     )
@@ -296,22 +290,22 @@ places_configuration <- function() {
   dimensionxval <<- c(1,2,4,8,12,16,24,30,50)
   dimensionxlabels <<- dimensionxval
 
-  elem1 <- list(occupancyrate = 1.2, nStudents = 2000,
+  elem1 <- list(occupancyrate = 1.2, nStudents = 3000,
                 conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05, quota = .6)
-  elem2 <- list(occupancyrate = .8, nStudents = 2000,
+  elem2 <- list(occupancyrate = .8, nStudents = 3000,
                 conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05, quota = .6)
-  elem3 <- list(occupancyrate = 1.2, nStudents = 2000,
+  elem3 <- list(occupancyrate = 1.2, nStudents = 3000,
                 conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05, quota = .3)
-  elem4 <- list(occupancyrate = .8, nStudents = 2000,
+  elem4 <- list(occupancyrate = .8, nStudents = 3000,
                 conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05, quota = .3)
-  elem5 <- list(occupancyrate = 1.2, nStudents = 1000,
+  elem5 <- list(occupancyrate = 1.2, nStudents = 1500,
                 conf.s.prefs = c(2,5,6,7), horizontalscenario = 1, threshold = .05, quota = .3)
-  elem6 <- list(occupancyrate = 1.2, nStudents = 1000,
+  elem6 <- list(occupancyrate = 1.2, nStudents = 1500,
                 conf.s.prefs = c(2,5,6,7), horizontalscenario = 1, threshold = .05, quota = .6)
   elements <<- list(elem1, elem2, elem3, elem4, elem5, elem6)
   rows <<- lapply(elements, function(elem) {
     lapply(dimensionxval, function(x){
-      elem$nColleges <- round(2000/x/elem$occupancyrate)
+      elem$nColleges <- round(elem$nStudents/x/elem$occupancyrate)
       elem$areasize <- round(sqrt(elem$nColleges/10))
       elem
     })
@@ -330,13 +324,13 @@ quota_configuration <- function() {
   dimensionxlabels <<- percent(dimensionxval, digits = 0)
   dimensionx <- "quota"
 
-  elem1 <- list(occupancyrate = 1.2,nStudents = 2000, nColleges = 600,
+  elem1 <- list(occupancyrate = 1.2,nStudents = 3000, nColleges = 600,
               areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05)
-  elem2 <- list(occupancyrate = .8, nStudents = 2000, nColleges = 600,
+  elem2 <- list(occupancyrate = .8, nStudents = 3000, nColleges = 600,
                 areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1, threshold = .05)
-  elem3 <- list(occupancyrate = 1.2, nStudents = 1000, nColleges = 300,
+  elem3 <- list(occupancyrate = 1.2, nStudents = 1500, nColleges = 300,
                 areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1, threshold = .05)
-  elem4 <- list(occupancyrate = .8, nStudents = 1000, nColleges = 300,
+  elem4 <- list(occupancyrate = .8, nStudents = 1500, nColleges = 300,
                 areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1, threshold = .05)
   elements <<- list(elem1, elem2,
                     elem3, elem4)
