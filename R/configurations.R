@@ -370,3 +370,36 @@ test_configuration <- function() {
     })
   })
 }
+
+#' Configuration for Students Rankings List Length Analysis
+#'
+#' @return configuration array
+#' @export
+#'
+#' @examples
+#'
+rankinglength_configuration <- function() {
+  dimensionxval <<- c(1,3,5,10,20,30,50,100,200)
+  dimensionxlabels <<- dimensionxval
+  dimensionx <- "conf.s.prefs"
+
+  elem1 <- list(occupancyrate = 1.2, quota = .6, nStudents = 3000, nColleges = 600,
+                areasize = 7, horizontalscenario = 1, threshold = .05)
+  elem2 <- list(occupancyrate = .8, quota = .6, nStudents = 3000, nColleges = 600,
+                areasize = 7, horizontalscenario = 1, threshold = .05)
+  elem5 <- list(occupancyrate = 1.2, quota = .6, nStudents = 1500, nColleges = 300,
+                areasize = 6, horizontalscenario = 1, threshold = .05)
+  elem3 <- list(occupancyrate = 1.2, quota = .3, nStudents = 3000, nColleges = 600,
+                areasize = 7, horizontalscenario = 1, threshold = .05)
+  elem4 <- list(occupancyrate = .8, quota = .3, nStudents = 3000, nColleges = 600,
+                areasize = 7, horizontalscenario = 1, threshold = .05)
+  elem6 <- list(occupancyrate = 1.2, quota = .3, nStudents = 1500, nColleges = 300,
+                areasize = 6, horizontalscenario = 1, threshold = .05)
+  elements <<- list(elem1, elem2, elem3, elem4, elem5, elem6)
+  rows <<- lapply(elements, function(elem) {
+    lapply(dimensionxval, function(x){
+      elem[[dimensionx]] <- rep(1,x)
+      elem
+    })
+  })
+}

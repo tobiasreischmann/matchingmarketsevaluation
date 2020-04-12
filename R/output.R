@@ -96,6 +96,38 @@ plotEvaluation <- function(data, configuration, dimensionx, dimensionxvals, rele
   legend('topright', legend = legendentries, col = colors[rowsrange], lty = rowsrange, pch = 1, cex=.8)
 }
 
+#' Creates the plot for the scenario evaluation.
+#'
+#' This function generates a plot for the data returned by \code{\link{calculateScenarios}}.
+#' It plots a line diagram, where the x-Axis lists the different values of one dimension.
+#'
+#' @param data list of lists representing the data to be plotted
+#'     Each top level list represents one scenario.
+#'     This is the return of @method calculateScenarios().
+#' @param configuration list of lists representing the initial scenarios.
+#'     This should not include multiple entries based on the x-scale.
+#' @param dimensionx string the label of the x-axis.
+#' @param dimensionxvals vector representing the values of the x-axis.
+#'
+#' @export
+#'
+#' @examples
+#'
+#' xdimensionvals = c(0.2,0.5)
+#' elem1 <- list(occupancyrate = .8, quota = .3, nStudents = 2700, nColleges = 600,
+#'               areasize = 7, conf.s.prefs = c(3,7,10,10), horizontalscenario = 1)
+#' elem2 <- list(occupancyrate = .8, quota = .3, nStudents = 600, nColleges = 200,
+#'               areasize = 6, conf.s.prefs = c(2,5,6,7), horizontalscenario = 1)
+#' elements <- list(elem1, elem2)
+#' scenarios <- lapply(elements, function(elem) {
+#'    lapply(xdimensionvals, function(x){
+#'       elem$threshold <- x
+#'       elem
+#'    })
+#' })
+#'
+#' xdata <- calculateScenarios(scenarios, nruns=2)
+#' plotEvaluation2(xdata, elements, "Threshold", xdimensionvals)
 plotEvaluation2 <- function(data, configuration, dimensionx, dimensionxvals, relevantForLegend = NULL, maxy = 14) {
   if (is.null(relevantForLegend)) {
     relevantForLegend <- c("occupancyrate", "quota", "nStudents", "nColleges")
