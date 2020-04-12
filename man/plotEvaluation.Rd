@@ -4,7 +4,8 @@
 \alias{plotEvaluation}
 \title{Creates the plot for the scenario evaluation.}
 \usage{
-plotEvaluation(data, configuration, dimensionx, dimensionxvals)
+plotEvaluation(data, configuration, dimensionx, dimensionxvals,
+  relevantForLegend = NULL, maxy = 14)
 }
 \arguments{
 \item{data}{list of lists representing the data to be plotted

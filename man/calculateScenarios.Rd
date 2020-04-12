@@ -4,7 +4,8 @@
 \alias{calculateScenarios}
 \title{Simulate multiple scenarios for the college admissions problem}
 \usage{
-calculateScenarios(scenarios, nruns = 10, nworkers = detectCores())
+calculateScenarios(scenarios, nruns = 10, nworkers = detectCores(),
+  seed = NULL)
 }
 \arguments{
 \item{scenarios}{list of lists containing the different scenarios.}
