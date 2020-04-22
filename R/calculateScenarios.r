@@ -20,6 +20,7 @@
 #' @param scenarios list of lists containing the different scenarios.
 #' @param nruns integer indicating the number of markets to be simulated (results are averaged over all simulated markets).
 #' @param nworkers integer number of workers generated for the parallel package.
+#' @param fullresult boolean if true not only the aggregated rounds of iterations it returned but the full object of each run.
 #'
 #' @export
 #'
@@ -57,7 +58,7 @@
 #' })
 #'
 #' xdata <- calculateScenarios(scenarios, nruns=2)
-calculateScenarios <- function(scenarios,nruns=10,nworkers=detectCores(),seed=NULL) {
+calculateScenarios <- function(scenarios,nruns=10,nworkers=detectCores(),seed=NULL,fullresult=FALSE) {
 
   if (!is.null(seed)) {
     set.seed(seed = seed)
@@ -159,6 +160,10 @@ calculateScenarios <- function(scenarios,nruns=10,nworkers=detectCores(),seed=NU
         complete <- sum(iterationtable[,1])
         ratio <- complete * threshold
         curr <- curr + sum(iteration$new+iteration$altered > ratio) + 1
+      }
+
+      if (fullresult){
+        return(daresult)
       }
 
       result <- curr/nruns
