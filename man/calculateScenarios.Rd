@@ -5,7 +5,7 @@
 \title{Simulate multiple scenarios for the college admissions problem}
 \usage{
 calculateScenarios(scenarios, nruns = 10, nworkers = detectCores(),
-  seed = NULL)
+  seed = NULL, fullresult = FALSE)
 }
 \arguments{
 \item{scenarios}{list of lists containing the different scenarios.}
@@ -13,6 +13,8 @@ calculateScenarios(scenarios, nruns = 10, nworkers = detectCores(),
 \item{nruns}{integer indicating the number of markets to be simulated (results are averaged over all simulated markets).}
 
 \item{nworkers}{integer number of workers generated for the parallel package.}
+
+\item{fullresult}{boolean if true not only the aggregated rounds of iterations it returned but the full object of each run.}
 }
 \value{
 
@@ -28,7 +30,8 @@ calculateScenarios(scenarios, nruns = 10, nworkers = detectCores(),
 \item{quota}{double between 0 and 1 indicating the percentage of private facilities}
 }
 \description{
-Simulate multiple scenarios for the college admissions problem
+This function simulates multiple scenarios for the iterative deferred acceptance mechanism with ties, implemented as stabsim3 within the matchingmarkets package.
+The results can be used to analyse the number of rounds necessary for the market to be cleared up to a specified threshold.
 }
 \examples{
 

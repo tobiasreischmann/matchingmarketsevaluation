@@ -2,7 +2,7 @@
 % Please edit documentation in R/output.R
 \name{plotEvaluation}
 \alias{plotEvaluation}
-\title{Creates the plot for the scenario evaluation.}
+\title{Creates a plot for the scenario evaluation.}
 \usage{
 plotEvaluation(data, configuration, dimensionx, dimensionxvals,
   relevantForLegend = NULL, maxy = 14)
